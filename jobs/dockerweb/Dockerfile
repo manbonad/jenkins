@@ -1,10 +1,8 @@
-FROM php:7.1.17-apache
+FROM php:7.4-apache
 LABEL maintainer="Jaivic"
 
-# Habilitar el módulo de reescritura de Apache
 RUN a2enmod rewrite
 
-# Actualizar la lista de paquetes e instalar las dependencias
 RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     libicu-dev \
@@ -16,8 +14,8 @@ RUN apt-get update && apt-get install -y \
     docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Copiar el contenido del proyecto al contenedor
 COPY . /var/www/html/
 WORKDIR /var/www/html/
+
 
 
